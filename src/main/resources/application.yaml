@@ -2,6 +2,7 @@ spring:
   datasource:
     url: jdbc:sqlite:./kidspos.db
     driverClassName: org.sqlite.JDBC
+    sql-script-encoding: utf-8
 
   jpa:
     properties:

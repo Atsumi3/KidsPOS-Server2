@@ -6,18 +6,16 @@
 <body>
 <div class="container">
     <h1>New Item</h1>
-    <form th:action="@{/items}" th:method="post">
+    <!--/*@thymesVar id="item" type=""*/-->
+    <form th:action="@{/items}" th:method="post" th:object="${item}">
         <div class="form-group">
-            <label class="control-label">名前</label>
-            <input class="form-control" name="name" type="text"/>
+            <label class="control-label">バーコード<input class="form-control" th:field="*{barcode}" type="text" minlength="10" maxlength="10" /></label>
         </div>
         <div class="form-group">
-            <label class="control-label">バーコード</label>
-            <input class="form-control" name="barcode" type="text"/>
+            <label class="control-label">名前<input class="form-control" th:field="*{name}" name="name" type="text" minlength="2"/></label>
         </div>
         <div class="form-group">
-            <label class="control-label">値段</label>
-            <input class="form-control" name="price" type="number"/>
+            <label class="control-label">値段<input class="form-control" th:field="*{price}" name="price" type="number" minlength="2"/></label>
         </div>
         <button class="btn btn-outline-primary" type="submit">作成</button>
     </form>

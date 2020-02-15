@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<!--suppress HtmlRequiredTitleElement -->
+<head th:replace="layout::base_header(${title})">
+</head>
+<body>
+<div class="container">
+    <h1>New Item</h1>
+    <form th:action="@{/items/{id}(id=*{id})}" th:method="put" th:object="${item}">
+        <div class="form-group">
+            <label class="control-label">バーコード<input class="form-control" type="text" th:field="*{barcode}" minlength="10" maxlength="10" /></label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">商品名<input class="form-control" type="text" th:field="*{name}" minlength="2" /></label>
+        </div>
+        <div class="form-group">
+            <label class="control-label">値段<input class="form-control" type="number" th:field="*{price}" minlength="2" /></label>
+        </div>
+        <button class="btn btn-outline-primary" type="submit">更新</button>
+    </form>
+    <div class="pull-right">
+        <a class="btn btn-outline-warning" href="/items">一覧画面へ</a>
+    </div>
+</div>
+</body>
+</html>

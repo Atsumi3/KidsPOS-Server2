@@ -62,11 +62,6 @@ class SaleService {
         } else {
             0
         }
-        items.forEach {
-            println(it.id)
-            println(it.name)
-            println(it.price)
-        }
         val sale = SaleEntity(id, saleBean.storeId, staffId,
                 items.size, items.sumBy { it.price }, saleBean.deposit, Date())
 
@@ -74,16 +69,15 @@ class SaleService {
 
         // 売り上げの詳細を保存
         items
-                .toSet()
-                .map { it.id }.filter { it != null }.distinct()
+                .toSet().mapNotNull { it.id }.distinct()
                 .forEach { itemId ->
                     val saleDetailId = try {
                         saleDetailRepository.getLastId() + 1
                     } catch (e: EmptyResultDataAccessException) {
                         1
                     }
-                    val items = items.filter { it.id == itemId!! }
-                    saleDetailRepository.save(SaleDetailEntity(saleDetailId, id, itemId!!, items[0].price, items.size))
+                    val items = items.filter { it.id == itemId }
+                    saleDetailRepository.save(SaleDetailEntity(saleDetailId, id, itemId, items[0].price, items.size))
                 }
 
         return savedSale

@@ -36,4 +36,8 @@ class ItemService {
         val item = ItemEntity(id, itemBean.barcode, itemBean.name, itemBean.price)
         return repository.save(item)
     }
+
+    fun update(item: ItemEntity): ItemEntity {
+        return repository.save(item)
+    }
 }
