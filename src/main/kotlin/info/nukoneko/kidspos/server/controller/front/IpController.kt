@@ -26,7 +26,9 @@ class IpController {
             val testInA = testNI.inetAddresses
             while (testInA.hasMoreElements()) {
                 val testIP = testInA.nextElement() as InetAddress
-                if (testIP.hostName.contains(":0:") || testIP.hostAddress.contains(":0:")) {
+                if (testIP.hostName.contains(":0:") ||
+                        testIP.hostAddress.contains(":0:") ||
+                        !testIP.hostAddress.startsWith("192.168")) {
                     continue
                 }
                 hosts.add(HostBean(testIP.hostName, testIP.hostAddress))
@@ -39,7 +41,7 @@ class IpController {
         return "ip/index"
     }
 
-    class HostBean(val name: String, val address: String) {
+    data class HostBean(val name: String, val address: String) {
         val nameId: String = UUID.randomUUID().toString()
         val addressId: String = UUID.randomUUID().toString()
     }
